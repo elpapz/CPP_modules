@@ -6,20 +6,25 @@
 
 class Contact
 {
-	std::string FirstName;
-	std::string NickName;
-	std::string LastName;
-	std::string PhoneNumber;
-	std::string DarkestSecret;
-	
+	private:
+		std::string FirstName;
+		std::string NickName;
+		std::string LastName;
+		std::string PhoneNumber;
+		std::string DarkestSecret;
+
 	public:
 		Contact();
 		~Contact();
-		std::string	Contact::Ask_User(std::string question);
-		friend Contact Get_Contact_Info();
+		std::string	Ask_User(std::string question);
+		void Get_Contact_Info();
+		void	Print_Contacto(int i);
+		void	Present_contact(int i);
+		void	Choose_Contact();
+		void	Contact_len();
 		//Contact(std::string FirstName, std::string NickName, std::string LastName, std::string PhoneNumber, std::string DarkestSecret);
-		
-	
+
+
 };
 
 #endif

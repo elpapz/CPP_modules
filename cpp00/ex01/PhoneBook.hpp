@@ -5,16 +5,15 @@
 
 class PhoneBook
 {
+	private:
+		Contact contacts[8];
+		unsigned int	index;
 	public:
 		PhoneBook();
 		~PhoneBook();
 		void	Welcome_Text();
-		void Add_Contact();
-
-	private:
-		Contact contacts[8];
+		void 	Add_Contact();
+		bool 	Search_Contact();
 
 };
-
-
 #endif

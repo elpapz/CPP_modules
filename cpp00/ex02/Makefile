@@ -1,11 +1,10 @@
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
 CC = c++
 RM = rm -f
-SRC = Contact.cpp \
-	PhoneBook.cpp \
-	main.cpp
+SRC = Account.cpp \
+	tests.cpp
 OBJ = $(SRC:.cpp=.o)
-NAME = myPhoneBook
+NAME = myaccount
 
 all: $(NAME)
 
