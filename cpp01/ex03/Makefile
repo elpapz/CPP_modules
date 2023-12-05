@@ -1,9 +1,12 @@
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
 CC = c++
 RM = rm -f
-SRC = main.cpp
+SRC = HumanA.cpp \
+	HumanB.cpp \
+	Weapon.cpp \
+	main.cpp
 OBJ = $(SRC:.cpp=.o)
-NAME = hiThisHisBrain
+NAME = unnecessaryViolence
 
 all: $(NAME)
 
