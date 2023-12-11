@@ -17,7 +17,7 @@ int	main(int ac, char ** av)
 		std::cout << "Empty string, please put in a valid one!!" << std::endl;
 		exit(EXIT_FAILURE);
 	}
-	std:: string Filename;
+	std:: string Filename = av[1];
 	std:: string strFind = av[2];
 	std::string strReplace = av[3];
 	Filename.append(".replace");
@@ -38,6 +38,6 @@ int	main(int ac, char ** av)
 
 void	replaceChar(std:: string line, std::string Find, std::string Reaplace)
 {
-	
+
 }
 

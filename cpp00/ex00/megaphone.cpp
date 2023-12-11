@@ -7,8 +7,6 @@ int	main(int ac, char **av)
 	{
 		for(int i = 1; av[i]; i++)
 		{
-			if (i > 1 && av[i])
-				std::cout << " ";
 			for(int j = 0; av[i][j]; j++)
 				std::cout << char(toupper(av[i][j]));
 		}
