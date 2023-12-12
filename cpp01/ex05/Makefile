@@ -1,9 +1,10 @@
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
 CC = c++
 RM = rm -f
-SRC = main.cpp
+SRC = Harl.cpp \
+	main.cpp
 OBJ = $(SRC:.cpp=.o)
-NAME = sedIsForLosers
+NAME = Harl
 
 all: $(NAME)
 
