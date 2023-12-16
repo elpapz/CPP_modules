@@ -4,8 +4,6 @@
 #include <iostream>
 #include <iomanip>
 
-
-
 class Harl
 {
 	public:
