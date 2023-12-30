@@ -2,5 +2,5 @@
 
 class Cat : public Animal
 {
-	
+
 };

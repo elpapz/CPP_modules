@@ -1,25 +1,52 @@
 #include "Contact.hpp"
-
+#include <cstdlib>
 
 Contact::Contact(){}
 
 Contact::~Contact(){}
+
+std::string Contact::Ask_User(std::string question)
+{
+	std::string input;
+
+	while(input.empty())
+    {
+		std::cout << question << std::flush;
+		std::getline(std::cin, input);
+		if(!std::cin.good())
+		{
+            if(std::cin.eof())
+                std::exit(130);
+			std::cin.clear();
+			std::cout << "Invalid input, try a different one." << std::endl;
+		}
+	}
+	return(input);
+}
+
+bool	isNum(std::string num)
+{
+	int	i;
+
+	i = 0;
+	while (num[i])
+		if (!isdigit(num[i++]))
+			return (false);
+	return (true);
+}
 
 void Contact::Get_Contact_Info()
 {
 	this->FirstName = Ask_User("Tell us your First Name: ");
 	this->LastName = Ask_User("Tell us your Last Name: ");
 	this->PhoneNumber = Ask_User("Tell us your Phone Number: ");
+	while (isNum(this->PhoneNumber) == false)
+	{
+		std::cerr << "Invalid Number" << std::endl;
+		this->PhoneNumber = Ask_User("Tell us your Phone Number: ");
+	}
 	this->NickName = Ask_User("Tell us your Nickname: ");
 	this->DarkestSecret = Ask_User("Tell us your Darkest Secret: ");
-}
-
-std::string	Contact::Ask_User(std::string question)
-{
-	std::string	user_input;
-	std::cout << question;
-	std::getline(std::cin, user_input, '\n');
-	return (user_input);
 }
 
 void	Contact::Choose_Contact()

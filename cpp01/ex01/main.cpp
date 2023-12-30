@@ -2,8 +2,9 @@
 
 int	main(void)
 {
-	int N;
 	Zombie	*Hord;
+	int N = 5;
+	/*
 	while(1)
 	{
 		std::cout << "Enter a integer that's going to be the number of zombies" << std::endl;
@@ -18,12 +19,12 @@ int	main(void)
 	}
 	std::string	hord_name;
 	std::cout << "Now it's time to give your Hord of Zombies a name: ";
-	getline(std::cin, hord_name);
-	std::cout << std::endl;
-	Hord = zombieHorde(N, hord_name);
+	std::getline(std::cin, hord_name);
+	std::cout << std::endl; */
+	Hord = zombieHorde(N, "hord_name");
 	for (int i = 0; i < N; i++)
 	{
 		Hord[i].announce();
 	}
-	delete Hord;
+	delete [] Hord;
 }

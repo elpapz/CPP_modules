@@ -11,7 +11,7 @@ class Animal
 		Animal(const Animal& copy);
 		Animal& operator=(const Animal& copy);
 		void makeSound();
-	
+
 	protected:
 		std::string type;
 };

@@ -27,7 +27,7 @@ class Fixed
 		bool operator<=(Fixed const &rhs) const;
 		bool operator==(Fixed const &rhs) const;
 		bool operator!=(Fixed const &rhs) const;
-		
+
 		Fixed operator++(void);
 		Fixed operator--(void);
 		Fixed operator++(int);

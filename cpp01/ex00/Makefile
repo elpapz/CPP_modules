@@ -1,5 +1,5 @@
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
-CC = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+CXX = c++
 RM = rm -f
 SRC = randomChump.cpp \
 	newZombie.cpp \
@@ -11,7 +11,7 @@ NAME = zombies
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)

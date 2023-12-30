@@ -2,7 +2,7 @@
 # define FIXED_HPP
 
 class Fixed
-{			
+{
 	public:
 		Fixed();
 		Fixed(Fixed const &copy);

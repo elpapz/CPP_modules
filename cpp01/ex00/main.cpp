@@ -14,5 +14,4 @@ int	main(void)
 	heap_zombie->announce();
 	delete heap_zombie;
 	randomChump(stack_zombie_name);
-	//delete heap_zombie;
 }

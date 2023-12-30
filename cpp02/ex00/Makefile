@@ -1,5 +1,5 @@
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
-CC = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
+CXX = c++
 RM = rm -f
 SRC = Fixed.cpp \
 	main.cpp
@@ -9,7 +9,7 @@ NAME = Fixed
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)

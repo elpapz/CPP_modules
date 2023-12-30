@@ -21,9 +21,6 @@ class Contact
 		void	Print_Contacto(int i);
 		void	Present_contact(int i);
 		void	Choose_Contact();
-		void	Contact_len();
-		//Contact(std::string FirstName, std::string NickName, std::string LastName, std::string PhoneNumber, std::string DarkestSecret);
-
 
 };
 

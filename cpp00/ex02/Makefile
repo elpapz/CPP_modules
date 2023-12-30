@@ -1,5 +1,5 @@
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
-CC = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
+CXX = c++
 RM = rm -f
 SRC = Account.cpp \
 	tests.cpp
@@ -9,10 +9,13 @@ NAME = myaccount
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)
 
 fclean:
+	$(RM) $(OBJ)
 	$(RM) $(NAME)
+
+re: clean all

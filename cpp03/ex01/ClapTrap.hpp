@@ -61,7 +61,7 @@ class	ClapTrap
 		int			getHitPoints(void) const;
 		int			getEnergyPoints(void) const;
 		int			getAttackDamage(void) const;
-		
+
 		// Member functions
 		void	attack(const std::string& target);
 		void	takeDamage(unsigned int amount);
