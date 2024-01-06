@@ -24,7 +24,7 @@ class ClapTrap
 
 	private:
 		std::string Name;
-		int lifePoints;
+		int hitPoints;
 		int energyPoints;
 		int attackDamage;
 };
