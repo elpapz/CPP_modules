@@ -12,7 +12,7 @@ ClapTrap::ClapTrap(const ClapTrap &copy)
 	this->Name = copy.Name;
 	this->hitPoints = copy.hitPoints;
 	this->energyPoints = copy.energyPoints;
-	this->attackDamage = attackDamage;
+	this->attackDamage = copy.attackDamage;
 	std::cout << "[CLAPTRAP COPY CONTRUCTOR CALLED]" << std::endl;
 }
 
