@@ -18,7 +18,6 @@ int main()
 /*
 int	main(void)
 {
-	titleHeader("SUBJECT TEST");
 	Fixed		a;
 	Fixed const	b(Fixed(5.05f) * Fixed(2));
 
@@ -36,7 +35,6 @@ int	main(void)
     Fixed c(3.14f);
     Fixed d(c);
 
-	titleHeader("ARITHMETIC OPERATORS");
     Fixed sum = b + c;
     Fixed diff = b - c;
     Fixed prod = b * c;
@@ -50,7 +48,6 @@ int	main(void)
 	std::cout << b << " / " << c << ": " << div << std::endl;
 	pressEnter();
 
-	titleHeader("COMPARISON OPERATORS");
 	std::cout << "b = " << b << std::endl;
 	std::cout << "c = " << c << std::endl << std::endl;
     bool greater = b > c;
@@ -67,7 +64,6 @@ int	main(void)
 	std::cout << b << " != " << c << ": " << notEqual << std::endl;
 	pressEnter();
 
-	titleHeader("INCREMENT OPERATORS");
     Fixed e = a;
     Fixed f = c;
 	std::cout << "e = " << e << std::endl;
@@ -83,7 +79,6 @@ int	main(void)
 	std::cout << "now f = " << f << std::endl;
 	pressEnter();
 
-	titleHeader("MIN AND MAX");
     Fixed minResult = Fixed::min(a, b);
     Fixed maxResult = Fixed::max(a, b);
 
@@ -91,7 +86,6 @@ int	main(void)
 	std::cout << "b = " << b << std::endl << std::endl;
 	std::cout << "Min between " << a << " and " << b << " is " << minResult << std::endl;
 	std::cout << "Max between " << a << " and " << b << " is " << maxResult << std::endl;
-	pressEnter();
 
     return 0;
 }
