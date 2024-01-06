@@ -1,14 +1,18 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string _name) : Name(_name), lifePoints(10), energyPoints(10), attackDamage(0)
+ClapTrap::ClapTrap(std::string _name) : Name(_name), hitPoints(10), energyPoints(10), attackDamage(0)
 {
 	std::cout << "[CLAPTRAP CONSTRUCTOR WITH PARAMETER CALLED]\n";
 }
 
-ClapTrap::ClapTrap() : Name("Default"), lifePoints(10), energyPoints(10), attackDamage(0) {std::cout << "CLAPTRAP DEFAULT CONSTRUCTOR CALLED\n";}
+ClapTrap::ClapTrap() : Name("Default"), hitPoints(10), energyPoints(10), attackDamage(0) {std::cout << "CLAPTRAP DEFAULT CONSTRUCTOR CALLED\n";}
 
-ClapTrap::ClapTrap(const ClapTrap &copy) : Name(Name), lifePoints(lifePoints), energyPoints(energyPoints), attackDamage(attackDamage)
+ClapTrap::ClapTrap(const ClapTrap &copy)
 {
+	this->Name = copy.Name;
+	this->hitPoints = copy.hitPoints;
+	this->energyPoints = copy.energyPoints;
+	this->attackDamage = attackDamage;
 	std::cout << "[CLAPTRAP COPY CONTRUCTOR CALLED]" << std::endl;
 }
 
@@ -20,7 +24,7 @@ ClapTrap& ClapTrap::operator=(ClapTrap &rhs)
 	if (this == &rhs)
 		return (*this);
 	this->Name = rhs.Name;
-	this->lifePoints = rhs.lifePoints;
+	this->hitPoints = rhs.hitPoints;
 	this->energyPoints = rhs.energyPoints;
 	this->attackDamage = rhs.attackDamage;
 	return (*this);
@@ -29,7 +33,7 @@ ClapTrap& ClapTrap::operator=(ClapTrap &rhs)
 void ClapTrap::dataUpdateDisplay()
 {
     std::cout << "    NAME -----> " << this->Name << std::endl;
-    std::cout << "    HIT POINTS ------> " << this->lifePoints << std::endl;
+    std::cout << "    HIT POINTS ------> " << this->hitPoints << std::endl;
     std::cout << "    ENERGY POINTS -------> " << this->energyPoints << std::endl;
     std::cout << "    ATTACK DAMAGE -------> " << this->attackDamage << std::endl;
     std::cout << std::endl << std::endl;
@@ -37,7 +41,7 @@ void ClapTrap::dataUpdateDisplay()
 
 void ClapTrap::attack(const std::string& target)
 {
-	if (this->energyPoints <= 0 || this->lifePoints <= 0)
+	if (this->energyPoints <= 0 || this->hitPoints <= 0)
 		{
 			std::cout << "You need to get your energy and life points up before attacking again!!" << std::endl;
 			return ;
@@ -50,19 +54,19 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (this->lifePoints <= 0)
+	if (this->hitPoints <= 0)
 	{
 		std::cout << "Can't attack who are already DEAD!\n";
 		return ;
 	}
 	std::cout << " ClapTrap " << this->Name << " was attacked and lost " << amount << " hit points " << std::endl;
-	this->lifePoints -= amount;
+	this->hitPoints -= amount;
 }
 
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this->energyPoints <= 0 || this->lifePoints <= 0)
+	if (this->energyPoints <= 0 || this->hitPoints <= 0)
 		{
 			std::cout << this->Name << " need's to get your energy and life points up before repairing again!!" << std::endl;
 			return ;
@@ -74,7 +78,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 int ClapTrap::getLifePoints()
 {
-	return (this->lifePoints);
+	return (this->hitPoints);
 }
 
 

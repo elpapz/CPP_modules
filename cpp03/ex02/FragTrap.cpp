@@ -3,14 +3,14 @@
 FragTrap::FragTrap() : ClapTrap()
 {
     std::cout << "[FRAGTRAP DEFAULT CONSTRUCTOR CALLED]\n";
-    this->lifePoints = 100;
+    this->hitPoints = 100;
     this->attackDamage = 30;
     this->energyPoints = 100;
 }
 
 FragTrap::FragTrap(std::string _Name) : ClapTrap(_Name)
 {
-	this->lifePoints = 100;
+	this->hitPoints = 100;
     this->attackDamage = 30;
     this->energyPoints = 100;
     std::cout << "[FRAGTRAP CONSTRUCTOR WITH PARAMETER CALLED]" << std:: endl;
@@ -25,7 +25,7 @@ FragTrap& FragTrap::operator=(const FragTrap& copy)
     if (this == &copy)
 		return (*this);
 	this->Name = copy.Name;
-	this->lifePoints = copy.lifePoints;
+	this->hitPoints = copy.hitPoints;
 	this->energyPoints = copy.energyPoints;
 	this->attackDamage = copy.attackDamage;
 	return (*this);
