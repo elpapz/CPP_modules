@@ -9,7 +9,7 @@ SRC = Animal.cpp \
 	Brain.cpp \
 	main.cpp
 OBJ = $(SRC:.cpp=.o)
-NAME = ex01
+NAME = ex02
 
 all: $(NAME)
 

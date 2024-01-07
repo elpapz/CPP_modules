@@ -2,24 +2,18 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
+
 int main()
 {
-	int number = 8;
-	Animal	*animals[8];
+// Animal Aanimal;
+// Animal *andre = new Animal();
+const Animal* j = new Dog();
+const Animal* i = new Cat();
+std::cout << j->getType() << " " << std::endl;
+std::cout << i->getType() << " " << std::endl;
+i->makeSound(); //will output the cat sound!
+j->makeSound();
 
-	for(int i = 0; i < number; i++)
-	{
-		std::cout << "[" << i << "]\n";
-		if (i < 4)
-			animals[i] = new Dog();
-		else
-			animals[i] = new Cat();
-	}
-	std::cout << "Animals created!!..... let's move on to delete them!\n";
-	for (int i = 0; i < number; i++)
-	{
-		std::cout << "[" << i << "]\n";
-		delete animals[i];
-	}
-	std::cout << "Animals were deleted!!" << std::endl;
+delete i;
+delete j;
 }
