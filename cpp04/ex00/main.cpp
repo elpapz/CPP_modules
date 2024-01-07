@@ -1,41 +1,40 @@
+#include "Animal.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
+
+// int main()
+// {
+// 	Animal *andre = new Animal();
+// 	std::cout << andre->getType() << " " << std::endl;
+// }
+
 int main()
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+const Animal* meta = new Animal();
+const Animal* j = new Dog();
+const Animal* i = new Cat();
+std::cout << j->getType() << " " << std::endl;
+std::cout << i->getType() << " " << std::endl;
+i->makeSound(); //will output the cat sound!
+j->makeSound();
+meta->makeSound();
 
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
+delete meta;
+delete i;
+delete j;
+std::cout << "\n\n" << "NOW... LET'S SEE THE WRONG EXAMPLES\n\n";
 
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
+const WrongAnimal* meta2 = new WrongAnimal();
+const WrongAnimal* i2 = new WrongCat();
+std::cout << i2->getType() << " " << std::endl;
+std::cout << meta2->getType() << " " << std::endl;
+i2->makeSound(); //will output the cat sound!
+meta2->makeSound();
 
-	delete meta;
-	delete j;
-	delete i;
+delete meta2;
+delete i2;
 
-	const Animal *original = new Dog();
-	const Animal *pointToOriginal = original;
-
-	std::cout << pointToOriginal->getType() << std::endl;
-	pointToOriginal->makeSound();
-
-	const Dog *otherOriginal = new Dog();
-	const Dog *newCopy = new Dog(*otherOriginal);
-
-	std::cout << otherOriginal->getType() << std::endl;
-	otherOriginal->makeSound();
-
-	std::cout << newCopy->getType() << std::endl;
-	newCopy->makeSound();
-
-	delete original;
-	delete otherOriginal;
-	delete newCopy;
-
-	titleHeader("WRONG ANIMAL TEST");
-	const WrongAnimal* cat = new WrongCat();
-	cat->makeSound();
-	delete cat;
+return 0;
 }

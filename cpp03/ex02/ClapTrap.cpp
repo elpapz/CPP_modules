@@ -9,11 +9,11 @@ ClapTrap::ClapTrap() : Name("Default"), hitPoints(10), energyPoints(10), attackD
 
 ClapTrap::ClapTrap(const ClapTrap &copy)
 {
+	std::cout << "[CLAPTRAP COPY CONTRUCTOR CALLED]" << std::endl;
 	this->Name = copy.Name;
 	this->hitPoints = copy.hitPoints;
 	this->energyPoints = copy.energyPoints;
 	this->attackDamage = copy.attackDamage;
-	std::cout << "[CLAPTRAP COPY CONTRUCTOR CALLED]" << std::endl;
 }
 
 ClapTrap::~ClapTrap(){std::cout << "[CLAPTRAP DESCTRUCTOR CALLED]\n";}
