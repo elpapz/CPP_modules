@@ -1,14 +1,14 @@
 #include "Bureaucrat.hpp"
-
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : Name("Bureaucrat Default Name"), _grade(42)
 {
-	std::cout << "DEFAULT CONSTRUCTOR CALLED" << std::endl;
+	std::cout << "BUREAUCRAT DEFAULT CONSTRUCTOR CALLED" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string name, int grade) : Name(name), _grade(grade)
 {
-	std::cout << "DOUBLE ARGUMENT CONSTRUCTOR CALLED\n";
+	std::cout << "BUREAUCRAT DOUBLE ARGUMENT CONSTRUCTOR CALLED\n";
 	try
 	{
 		if(_grade > 150)
@@ -28,19 +28,19 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : Name(name), _grade(g
 
 Bureaucrat::Bureaucrat(const Bureaucrat& copy)
 {
-	std::cout << "COPY CONSTRUCTOR CALLED\n";
+	std::cout << "BUREAUCRAT COPY CONSTRUCTOR CALLED\n";
 	this->Name = copy.Name;
 	this->_grade = copy._grade;
 }
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "DESTRUCTOR CALLED\n";
+	std::cout << "BUREAUCRAT DESTRUCTOR CALLED\n";
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& copy)
 {
-	std::cout << "ASSIGNMENT OPERATOR CALLED\n";
+	std::cout << "BUREAUCRAT ASSIGNMENT OPERATOR CALLED\n";
 	if(this == &copy)
 		return (*this);
 	this->_grade = copy._grade;
@@ -106,11 +106,20 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureu)
 	return (os << bureu.getName() << ", bureaucrat grade " << bureu.getGrade());
 }
 
-void Bureaucrat::signForm(Form& form)
+void Bureaucrat::signForm(AForm& form)
 {
 	form.beSigned(*this);
 	if (form.getBoolSign() == true)
 		std::cout << this->Name << " signed " << form.getName() << std::endl;
 	else
 		std::cout << this->Name << " couldn't sign " << form.getName() << " because " << "your grade didn't match the expected\n";
+}
+
+void Bureaucrat::executeForm(AForm const& form)
+{
+	bool status = form.execute(*this);
+	if (status == false)
+		std::cout << "Sorry, " << this->Name << " you were not able to execute " << form.getName() << std::endl;
+	else
+		std::cout << "Congrats, " << this->Name << " you were able to execute " << form.getName() << std::endl;
 }

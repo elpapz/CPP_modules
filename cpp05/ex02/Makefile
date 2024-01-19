@@ -2,10 +2,13 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
 CXX = c++
 RM = rm -f
 SRC = Bureaucrat.cpp \
-	Form.cpp \
+	AForm.cpp \
+	PresidentialPardonForm.cpp \
+	RobotomyRequestForm.cpp \
+	ShrubberyCreationForm.cpp \
 	main.cpp
 OBJ = $(SRC:.cpp=.o)
-NAME = ex01
+NAME = ex02
 
 all: $(NAME)
 

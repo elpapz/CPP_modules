@@ -47,17 +47,17 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& copy)
 	return (*this);
 }
 
-void Bureaucrat::incrementGrade(int value)
+void Bureaucrat::incrementGrade()
 {
 	try
 	{
-		if(this->_grade - value <= 0)
+		if((this->_grade - 1) == 0)
 		{
 			_grade = 1;
 			throw GradeTooHighException();
 		}
 		else
-			_grade -= value;
+			_grade -= 1;
 	}
 	catch(Bureaucrat::GradeTooHighException& e)
 	{
@@ -66,17 +66,17 @@ void Bureaucrat::incrementGrade(int value)
 	}
 }
 
-void Bureaucrat::decrementGrade(int value)
+void Bureaucrat::decrementGrade()
 {
 	try
 	{
-		if(this->_grade + value > 150)
+		if((this->_grade + 1) > 150)
 		{
 			_grade = 150;
 			throw GradeTooLowException();
 		}
 		else
-			_grade += value;
+			_grade += 1;
 	}
 	catch(Bureaucrat::GradeTooLowException& e)
 	{
