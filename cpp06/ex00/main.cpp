@@ -14,6 +14,11 @@ int main(int ac, char **av)
 		std::cout << "Wrong number of arguments\n";
 		return (0);
 	}
+	if (!av[1][0])
+	{
+		std::cout << "Empty argument :/\n";
+		return (0);
+	}
 	std::string input = av[1];
 	ScalarConverter::convert(input);
 }
