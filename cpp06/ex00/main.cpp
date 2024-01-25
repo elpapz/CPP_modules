@@ -1,14 +1,14 @@
+#include "ScalarConverter.hpp"
 #include <climits>
 #include <limits>
 #include <cstdlib>
 #include <cmath>
-#include <iostream>
-#include "ScalarConverter.hpp"
+#include <cfloat>
+#include <iomanip>
+
 
 int main(int ac, char **av)
 {
-	// std::string str = "andre";
-	// std::cout << str.length() << std::endl << str.size() << std::endl << str.find_first_of('e') << std::endl;
 	if (ac != 2)
 	{
 		std::cout << "Wrong number of arguments\n";
@@ -22,3 +22,18 @@ int main(int ac, char **av)
 	std::string input = av[1];
 	ScalarConverter::convert(input);
 }
+
+
+/*
+int main(void)
+{
+	int i = 0;
+	float f = (float)i;
+	std::cout << "STANDART FLOAT\n";
+	std::cout << INT_MAX << std::endl << INT_MIN << std::endl;
+
+	std::cout << "-FLOATMAX TEST\n";
+	std::cout << -INT_MAX << std::endl << INT_MAX << std::endl;
+}
+*/
+

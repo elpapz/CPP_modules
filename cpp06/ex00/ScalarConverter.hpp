@@ -6,6 +6,7 @@
 #define INT		2
 #define FLOAT	3
 #define DOUBLE	4
+#define LITERALS 5
 #define ERROR	0
 
 

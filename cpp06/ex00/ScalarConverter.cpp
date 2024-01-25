@@ -25,10 +25,20 @@ bool is_char_valid(std::string input)
 	return true;
 }
 
+bool isLiteral(std::string input)
+{
+    if(input == "-inf" || input == "+inf" || input == "-inff" || \
+    input == "+inff" || input == "nan")
+        return true;
+    return false;
+}
+
 int its_num(std::string input)
 {
 	if (is_char_valid(input))
 		return (CHAR);
+	if (isLiteral(input))
+		return (LITERALS);
 	int i = 0;
 	if (((input[i] >= '0' && input[i] <= '9') || input[i] == '+' || input[i] == '-'))
 	{
@@ -49,62 +59,71 @@ int its_num(std::string input)
 			 	return (ERROR);
 			else
 				return (DOUBLE);
-
 		}
 	}
 	else
 		return (ERROR);
 }
 
-long double get_type(std::string input, int type)
+void printLiteral(std::string input)
 {
-	if (type == CHAR)
-		return (input[0]);
-	else if (type == INT)
-		return(std::strtol(input.c_str(), NULL, 10));
-	else if (type == FLOAT)
-		return (std::strtof(input.c_str(), NULL));
-	else if (type == DOUBLE)
-		return (std::strtold(input.c_str(), NULL));
-	return (0);
+    std::cout << "char: impossible" << std::endl;
+    std::cout << "int: impossible" << std::endl;
+    if(input == "-inf" || input == "+inf" || input == "nan")
+        std::cout << "float: " << input << "f" << std::endl;
+    else
+        std::cout << "float: " << input << std::endl;
 
+    if(input == "-inff")
+        std::cout << "double: -inf" << std::endl;
+    else if(input == "+inff")
+        std::cout << "double: +inf" << std::endl;
+    else
+        std::cout << "double: " << input << std::endl;
 }
 
-void print_conversion(std::string input, long double i)
+void print_conversion(std::string input, long double i, int type)
 {
-	(void)input;
-	std::cout << "char ";
+	if (type == LITERALS)
+	{
+		printLiteral(input);
+		return ;
+	}
+	std::cout << "char: ";
 	if (i > UCHAR_MAX || i <= 0)
 		std::cout << "Non displayable\n";
 	else
 		std::cout << static_cast<char>(i) << std::endl;
-	std::cout << "int ";
+	std::cout << "int: ";
 	if (i > INT_MAX || i < INT_MIN)
 		std::cout << "Non displayable\n";
 	else
 		std::cout << static_cast<int>(i) << std::endl;
-	std::cout << "float ";
-	i = std::strtof(input.c_str(), NULL);
-	if (i > FLT_MAX || i < FLT_MIN)
+	std::cout << "float: ";
+	if (i < -FLT_MAX || i > FLT_MAX)
 		std::cout << "Non displayable\n";
+	else if ((i - (int)i) == 0)
+		std::cout << i << ".0f\n";
+	else
+		std::cout << i << "f\n";
+	std::cout << "double: ";
+	if (i < -DBL_MAX || i > DBL_MAX)
+		std::cout << "Non displayable\n";
+	else if ((i - (int)i) == 0)
+		std::cout << i << ".0\n";
 	else
 		std::cout << i << std::endl;
-	std::cout << "double ";
-	if (i > DBL_MAX || i < DBL_MIN)
-		std::cout << "Non displayable\n";
-	else
-		std::cout << static_cast<double>(i) << std::endl;
 }
 
 void ScalarConverter::convert(std::string input)
 {
+
 	int type = its_num(input);
-	long double i;
 	if (type)
 	{
-		i = get_type(input, type);
-		print_conversion(input, i);
-		std::cout << type << std::endl;
+		print_conversion(input, std::strtold(input.c_str(), NULL), type);
 		return ;
 	}
+	else
+		std::cout << "Wrong input\n";
 }
