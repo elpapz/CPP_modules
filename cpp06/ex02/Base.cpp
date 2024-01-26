@@ -44,17 +44,17 @@ void identify(Base& p)
 		(void)dynamic_cast<A&>(p);
 		std::cout << "A" << std::endl;
 	}
-	catch (std::exception& exception){}
+	catch (std::exception& exception){std::cout << "FODASSE A\n";}
 	try
 	{
 		(void)dynamic_cast<B&>(p);
 		std::cout << "B" << std::endl;
 	}
-	catch (std::exception& exception){}
+	catch (std::exception& exception){std::cout <<"FODASSE B\n";}
 	try
 	{
 		(void)dynamic_cast<C&>(p);
 		std::cout << "C" << std::endl;
 	}
-	catch (std::exception& exception){}
+	catch (std::exception& exception){std::cout <<"FODASSE C\n";}
 }
