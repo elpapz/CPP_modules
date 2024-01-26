@@ -40,7 +40,7 @@ int main()
 	bool* n = reinterpret_cast<bool*>(ch);
 	cout << *n << endl;
 
-	cout << *(reinterpret_cast<bool*>(ch));
+	//cout << *(reinterpret_cast<bool*>(ch));
 
 	return 0;
 }

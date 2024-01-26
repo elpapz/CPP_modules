@@ -4,7 +4,7 @@
 template <typename T>
 T max(T a, T b)
 {
-    if(a1 > b)
+    if(a > b)
         return a;
     return b;
 }
@@ -17,7 +17,7 @@ T min(T a, T b)
     return b;
 }
 
-template  <typename T> 
+template  <typename T>
 void swap(T &a, T &b)
 {
     T tmp = a;
