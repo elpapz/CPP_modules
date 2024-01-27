@@ -3,6 +3,14 @@
 
 #include <iostream>
 
+template< typename T >
+void print_str( T& x )
+{
+  std::cout << x << std::endl;
+  return ;
+}
+
+
 template<typename T, typename F>
 void iter(T *array, int len, void(*func)(F))
 {
