@@ -1,37 +1,35 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 03:04:08 by ade-pinh          #+#    #+#             */
-/*   Updated: 2024/01/21 03:43:34 by ade-pinh         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef __easyfind_H__
-# define __easyfind_H__
+#ifndef EASYFIND_H
+# define EASYFIND_H
 
 # include <iostream>
-# include <algorithm>
+# include <vector>
 # include <iterator>
-# include <exception>
+# include <algorithm>
 
-class NotFound : public std::exception
+class NotFoundException : public std::exception
 {
 	public:
-		virtual const char *what() const throw() { return ("Look in another Container."); }
+		virtual const char* what() const throw()
+		{
+			return ("Cannot reach that element!!");
+		}
 };
 
-template <typename T> typename T::iterator easyfind(T &arr, int n)
+template<typename T>
+typename T::iterator easyfind(T *array, int _n)
 {
-	if (arr.empty())
-		throw NotFound();
-	typename T::iterator it = std::find(arr.begin(), arr.end(), n);
-	if (*it == n)
-		return (it);
-	throw NotFound();
-}
+    typename T::iterator it;
 
+    try
+    {
+        it = std::find(array->begin(), array->end(), _n);
+        if (it == array->end())
+            throw ::NotFoundException();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    return (it);
+}
 #endif

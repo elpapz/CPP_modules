@@ -1,33 +1,18 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 03:27:30 by ade-pinh          #+#    #+#             */
-/*   Updated: 2024/01/21 04:01:36 by ade-pinh         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "easyfind.hpp"
 #include <vector>
+# include <cstdlib>
+# include <exception>
+# include <iterator>
+# include <algorithm>
 
-int main()
+int main(void)
 {
-	int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-	size_t arr_size = sizeof(arr) / sizeof(arr[0]);
-	std::vector<int> vec(arr, arr + arr_size);
-
-	try
-	{
-		for (int i = 0; i < 11; i++)
-			std::cout << *easyfind(vec, i) << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-
-	return (0);
+    int num[] = {1, 2, 37, 42, 53, 6, 7, 8, 95};
+    std::vector<int> v(num, num + sizeof(num) / sizeof(*num));
+    for (int i = 0; i < 11; i++)
+    {
+        std::vector<int>::iterator it = easyfind(&v, i);
+        if (it != v.end())
+            std::cout << *easyfind(&v, i) << std::endl;
+    }
 }

@@ -1,100 +1,73 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Span.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 04:28:03 by ade-pinh          #+#    #+#             */
-/*   Updated: 2024/01/21 05:25:17 by ade-pinh         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Span.hpp"
 
-Span::Span() : _n(0), _size(0), _array(new int[0]) {}
 
-Span::Span(unsigned int n) : _n(n), _size(0), _array(new int[n])
+Span::Span() : _n(0) {}
+
+Span::Span(unsigned int n) : _n(n) {}
+
+Span::Span(const Span &copy) : _n(copy._n), data_stored(copy.data_stored) {}
+Span &Span::operator=(Span const &copy)
 {
-	for (unsigned int i = 0; i < n; i++)
-		this->_array[i] = 0;
+    if(this != &copy)
+    {
+        this->_n = copy._n;
+        this->data_stored = copy.data_stored;
+    }
+    return (*this);
 }
 
-Span::Span(const Span &cpy)
+Span::~Span() {}
+
+unsigned int min(std::vector<int> a)
 {
-	*this = cpy;
+    int min = RAND_MAX;
+    std::vector<int>::iterator it = a.begin();
+        while (it != a.end())
+        {
+            if (std::abs(*it - *(it + 1)) < min)
+			    min = std::abs(*it - *(it + 1));
+            it++;
+        }
+        return ((unsigned int)min);
 }
 
-Span &Span::operator=(Span const &cpy)
+unsigned int Span::shortestSpan()
 {
-	if (this != &cpy)
-	{
-		if (this->_array)
-			delete [] this->_array;
-		this->_n = cpy._n;
-		this->_size = cpy._size;
-		this->_array = new int[_n];
-		for (unsigned int i = 0; i < _n; i++)
-			this->_array[i] = cpy._array[i];
-	}
-	return *this;
+    if(this->_n <= 1)
+        throw std::out_of_range("Not enough numbers to find a span");
+    std::vector<int> tmp = this->data_stored;
+    std::sort(tmp.begin(), tmp.end());
+    unsigned int min_num = min(this->data_stored);
+    return (min_num);
 }
 
-Span::~Span()
+void Span::addSeveralNum(unsigned int n)
 {
-	delete [] _array;
+    std::srand(std::time(NULL));
+    while (n > 0)
+    {
+        if (this->data_stored.size() >= this->_n)
+            throw std::out_of_range("Your reached the limit of the storage space");
+        data_stored.push_back(std::rand());
+        n -= 1;
+    }
 }
 
-void Span::addNumber(int n)
+void Span::addNumber(int num)
 {
-	if (this->_size >= _n)
-		throw ArrayFullException();
-	this->_array[this->_size] = n;
-	this->_size++;
+    if (this->data_stored.size() >= this->_n)
+        throw std::out_of_range("Your reached the limit of the storage space");
+    else
+        this->data_stored.push_back(num);
 }
 
-void Span::addNumber(std::vector<int> begin)
-{
-	if (this->_size + (unsigned int)(sizeof(begin.begin()) / sizeof(begin[0])) >= _n)
-		throw ArrayFullException();
-	for (std::vector<int>::iterator it = begin.begin(); it != begin.end(); it++)
-	{
-		this->_array[this->_size] = *it;
-		this->_size++;
-	}
-}
 
-int Span::shortestSpan()
+unsigned int Span::longestSpan()
 {
-	if (this->_size <= 1)
-		throw EmptyArrayException();
-	std::vector<int> vec(this->_array, this->_array + this->_size);
-	std::sort(vec.begin(), vec.end());
-	int min = 2147483647;
-	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
-	{
-		if (abs(*it - *(it + 1)) < min)
-			min = abs(*it - *(it + 1));
-	}
-	return min;
-}
-
-int Span::longestSpan()
-{
-	if (_size <= 1)
-		throw EmptyArrayException();
-	std::vector<int> vec(this->_array, this->_array + this->_size);
-	std::vector<int>::iterator min = std::min_element(vec.begin(), vec.end());
-	std::vector<int>::iterator max = std::max_element(vec.begin(), vec.end());
-	return abs(*max - *min);
-}
-
-const char *Span::ArrayFullException::what() const throw()
-{
-	return "Array is full";
-}
-
-const char *Span::EmptyArrayException::what() const throw()
-{
-	return "Array is empty";
+    if(this->_n <= 1)
+        throw std::out_of_range("Not enough numbers to find a span");
+    std::vector<int> tmp = this->data_stored;
+    std::sort(tmp.begin(), tmp.end());
+    unsigned int max_num = std::abs(*tmp.begin() - *(tmp.end() - 1));
+    return (max_num);
 }
