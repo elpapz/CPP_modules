@@ -14,6 +14,15 @@ static bool isLeapYear(int year)
     return (false);
 }
 
+int ft_stoi(const std::string& str)
+{
+    int num;
+    std::stringstream ss(str);
+
+    ss >> num;
+    return num;
+}
+
 float ft_stof(const std::string& str)
 {
     float num;
@@ -74,6 +83,7 @@ void	parse_input(std::ifstream& inputfile)
 			std::cerr << "Error: bad input => " << line << std::endl;
 			continue;
 		}
+		date = line.substr(separator + 2);
 		else if (valid_rate(date) == false)
 		{
 			std::cerr << "Error: bad input => " << line << std::endl;
