@@ -52,9 +52,10 @@ void BitCoinExchange::collect_data(std::ifstream& sourcefile)
 
 bool valid_date(std::string date)
 {
-	int year, month, day, i;
+	int year, month, day;
 	std::string temp_date;
 	std::stringstream ss(date);
+	int i = 0;
 	if (date.find_first_of('-') != 4 || date.length() != 10)
 	{
 		std::cout << "fuck" << std::endl;
@@ -90,8 +91,9 @@ bool valid_date(std::string date)
 	}
     if (month == 2)
     {
-        if (!isLeapYear(year) && day > 28)
+        if (!isLeapYear(year))
         {
+			if (day > 28)
             return (false);
         }
 		else
@@ -103,20 +105,23 @@ bool valid_date(std::string date)
 	return (true);
 }
 
-bool valid_rate(std::string& rate)
+bool valid_rate(std::string& rate, std::string& date)
 {
 	int dot = 0;
 	if (rate.empty() || rate.length() < 1)
+	{
+		std::cerr << "Error: bad input => " << date << std::endl;
 		return false;
+	}
 	if (rate[0] == '-')
 	{
 		std::cerr << "Error: not a positive number." << std::endl;
-		return (true);
+		return (false);
 	}
 	else if (rate > "2147483647")
 	{
 		std::cerr << "Error: too large number." << std::endl;
-		return true;
+		return false;
 	}
 	for (size_t i = 0; i < rate.length(); i++)
 	{
@@ -160,43 +165,43 @@ void BitCoinExchange::parse_input(std::ifstream& inputfile)
 		}
 		rate_raw = line.substr(separator + 2);
 		//std::cout << "rate: " << date << std::endl;
-		if (valid_rate(rate_raw) == false)
+		if (valid_rate(rate_raw, line) == false)
 		{
 			std::cerr << "Error: bad input => " << line << std::endl;
 			continue;
 		}
 	
 		rate = ft_stof(rate_raw);
-		for (std::map<std::string, float>::iterator it = this->_rates.begin(); it != this->_rates.end(); it++)
-		{
-			std::map<std::string, float>::iterator itt = dataBase.find
-			int find = it->first.find(date.c_str());
-			if (find == 0)
+		//for (std::map<std::string, float>::iterator it = this->dataBase.begin(); it != this->dataBase.end(); it++)
+		//{
+			std::map<std::string, float>::iterator it_find = dataBase.find(date);
+			//int find = it->first.find(date.c_str());
+			if (it_find != dataBase.end())
 			{
-				if (rate * it->second > 2147483648)
+				if (rate * it_find->second > 2147483648)
 				{
 					std::cerr << "Error: too large number." << line << std::endl;
-					break ;
+					continue;
 				}
 				else
 				{
-					std::cout << date << " => " << rate << " = " << rate * it->second << std::endl;
-					break ;
+					std::cout << date << " => " << rate << " = " << rate * it_find->second << std::endl;
+					continue;
 				}
 			}
 			else
-			{
-				if (it != this->_rates.begin())
-					it--;
-				if (rate * it->second > 2147483648)
+			{	it_find = dataBase.lower_bound(date);
+				if (it_find != dataBase.begin())
+					--it_find;
+				if (rate * it_find->second > 2147483648)
 				{
 					std::cerr << "Error: too large number." << line << std::endl;
-					break;
+					continue;
 				}
-				std::cout << date << " => " << rate << " = " << rate * it->second << std::endl;
-				return ;
+				std::cout << date << " => " << rate << " = " << rate * it_find->second << std::endl;
+				continue;
 			}
-		}
+		//}
 		//std::cout << date << " => " << rate << " = " << rate * getRate(rate_raw) << std::endl;
 	}
 }
