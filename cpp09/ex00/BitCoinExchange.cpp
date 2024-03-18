@@ -1,6 +1,6 @@
 #include "BitCoinExchange.hpp"
 
-BitCoinExchange::BitCoinExchange(void) {};
+BitCoinExchange::BitCoinExchange(void) {}
 
 BitCoinExchange::BitCoinExchange(const BitCoinExchange& to_copy) {
     *this = to_copy;
@@ -11,4 +11,4 @@ BitCoinExchange& BitCoinExchange::operator=(const BitCoinExchange& to_copy) {
     return *this;
 }
 
-BitCoinExchange::~BitCoinExchange(void) {};
+BitCoinExchange::~BitCoinExchange(void) {}

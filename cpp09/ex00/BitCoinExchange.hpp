@@ -16,8 +16,9 @@ class BitCoinExchange
         BitCoinExchange(const BitCoinExchange& to_copy);
         BitCoinExchange& operator=(const BitCoinExchange& to_copy);
         ~BitCoinExchange(void);
-		void collect_data(std::ifstream& sourcefile);
+		void 	collect_data(std::ifstream& sourcefile);
 		void	read_files(std::string source, std::string input);
+		void 	parse_input(std::ifstream& inputfile);
 	private:
 		std::map<std::string, float> dataBase;
 };
