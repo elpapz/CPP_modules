@@ -40,7 +40,7 @@ void BitCoinExchange::collect_data(std::ifstream& sourcefile)
 	std::string line;
     size_t i;
 	float result;
-
+	
     std::getline(sourcefile, line);
     while (std::getline(sourcefile, line))
     {
@@ -61,7 +61,6 @@ static bool valid_date(std::string date)
 	int i = 0;
 	if (date.find_first_of('-') != 4 || date.length() != 10)
 	{
-		std::cout << "fuck" << std::endl;
 		return (false);
 	}
 	while (std::getline(ss, temp_date, '-'))
@@ -196,7 +195,6 @@ void BitCoinExchange::parse_input(std::ifstream& inputfile)
 			std::cout << date << " => " << rate << " = " << rate * it_find->second << std::endl;
 			continue;
 		}
-		
 	}
 }
 

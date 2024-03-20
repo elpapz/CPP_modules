@@ -9,77 +9,81 @@ RPN::RPN(const RPN& copy)
 	*this = copy;
 }
 
-RPN::&RPN::operator=(RPN const& copy)
+RPN &RPN::operator=(RPN const& copy)
 {
-	if (this != &copy)
-		return (copy);
+    (void)copy;
 	return (*this);
 }
 
-static double applyOperation(double a, double b, eOperation op)
+void RPN::validate_input(char *input)
 {
-    switch (op)
+    std::string temp(input);
+    //std::cout << "FUCK1\n";
+    if (temp.find_first_not_of(" \t9876543210+-/*") != std::string::npos)
     {
-        case ADD:
+        //std::cout << "FUCK2\n";
+        throw WrongInputException(); 
+    }
+}
+
+double RPN::calculations(double a, double b, char token)
+{
+    switch (token)
+    {
+        case '+':
         {
             return (a + b);
         }
-        case SUBTRACT:
+        case '-':
         {
             return (a - b);
         }
-        case MULTIPLY:
+        case '*':
         {
             return (a * b);
         }
-        case DIVIDE:
+        case '/':
         {
             return (a / b);
         }
         default:
         {
-            throw InvalidInputException();
+            throw WrongInputException();
         }
     }
 }
 
-void RPN::calculate(std::string const& input)
+void RPN::convert(char *input)
 {
-    std::istringstream  iss(input);
+    std::string temp_input(input);
+    std::stringstream  iss(temp_input);
     std::string         token;
 
     while (!iss.eof())
     {
         iss >> token;
+        //double i = std::stod(token);
         if (iss.fail() || iss.bad() || token.length() != 1)
-        {
-            throw InvalidInputException();
-        }
+            throw WrongInputException();
         if (isdigit(token[0]))
-        {
             _stack.push(std::atoi(token.c_str()));
-        }
         else
         {
-            if (_stack.size() < 2)
-            {
-                throw InvalidInputException();
-            }
+            if (_stack.size() < 2 || token.length() > 1)
+                throw WrongInputException();
             double  a = _stack.top();
             _stack.pop();
             double  b = _stack.top();
             _stack.pop();
-            _stack.push(applyOperation(b, a, static_cast<eOperation>(token[0])));
+            _stack.push(calculations(b, a, token[0]));
         }
     }
     if (_stack.size() != 1)
-    {
-        throw std::out_of_range("hello");
-    }
+        throw WrongInputException();
     std::cout << _stack.top() << std::endl;
 }
 
-// const char* InvalidInputException::what() const throw()
-// {
-//     return ("Error");
-// }
+const char* RPN::WrongInputException::what() const throw()
+{
+    return ("The program does not support that input");
+}
