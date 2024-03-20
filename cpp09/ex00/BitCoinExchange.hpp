@@ -8,6 +8,7 @@
 # include <string>
 # include <sstream>
 # include <exception>
+# include <cstdlib>
 
 class BitCoinExchange
 {
