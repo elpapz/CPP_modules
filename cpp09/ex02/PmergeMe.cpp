@@ -1,39 +1,45 @@
 # include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(){}
+PmergeMe::PmergeMe(){_deque = new (std::deque<int>);
+_vector = new (std::vector<int>);
+}
 
-PmergeMe::~PmergeMe(){}
+PmergeMe::~PmergeMe(){delete _deque; delete _vector;}
 
 PmergeMe::PmergeMe(const PmergeMe &other) {*this = other;}
 
 PmergeMe &PmergeMe::operator=(PmergeMe const &other)
 {
 	if (this != &other)
+	{
+	}
 	return (*this);
 }
-clock_t PmergeMe::getVecStartTime(void){return (vectorStart);}
 
-clock_t PmergeMe::getVecEndTime(void){return (vectorEnd);}
-
-clock_t PmergeMe::getDequeStartTime(void){return (dequeStart);}
-
-clock_t PmergeMe::getDequeEndTime(void){return (dequeEnd);}
+void PmergeMe::printSorted(void)
+{
+	std::cout << "After:  ";
+	for (std::vector<int>::iterator it = _vector->begin(); it != _vector->end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
 
 void PmergeMe::initVector(int ac, char **av)
 {
+	size = ac - 1;
 	this->vectorStart = clock();
 	for (int i = 1; i < ac; i++)
-		_vector.push_back(std::atoi(av[i]));
+		_vector->push_back(std::atoi(av[i]));
 }
 
 void PmergeMe::initDeque(int ac, char **av)
 {
 	this->dequeStart = clock();
 	for (int i = 1; i < ac; i++)
-		_deque.push_back(std::atoi(av[i]));
+		_deque->push_back(std::atoi(av[i]));
 }
 
-std::deque<int>& checkMerge(std::deque<int> &deq1, std::deque<int> &deq2)
+std::deque<int> checkMerge(std::deque<int> &deq1, std::deque<int> &deq2)
 {
 	std::deque<int> deque;
 	std::deque<int>::iterator it1 = deq1.begin();
@@ -52,7 +58,7 @@ std::deque<int>& checkMerge(std::deque<int> &deq1, std::deque<int> &deq2)
 	return (deque);
 }
 
-std::vector<int>& checkMerge(std::vector<int> &vector1, std::vector<int> &vector2)
+std::vector<int> checkMerge(std::vector<int> &vector1, std::vector<int> &vector2)
 {
 	std::vector<int> vector;
 	std::vector<int>::iterator it1 = vector1.begin();
@@ -71,7 +77,7 @@ std::vector<int>& checkMerge(std::vector<int> &vector1, std::vector<int> &vector
 	return (vector);
 }
 
-void SortVector(std::vector<int> &vector)
+void PmergeMe::sortVector(std::vector<int> &vector)
 {
 	if(vector.empty())
 		return ;
@@ -93,12 +99,12 @@ void SortVector(std::vector<int> &vector)
 		vec1.push_back(vector[i]);
 	for (size_t i = vector.size() / 2; i < vector.size(); i++)
 		vec2.push_back(vector[i]);
-	SortVector(vec1);
-	SortVector(vec2);
+	sortVector(vec1);
+	sortVector(vec2);
 	vector = checkMerge(vec1, vec2);
 }
 
-void SortDeque(std::deque<int> &deque)
+void PmergeMe::sortDeque(std::deque<int> &deque)
 {
 	if(deque.empty())
 		return ;
@@ -120,19 +126,27 @@ void SortDeque(std::deque<int> &deque)
 		deq1.push_back(deque[i]);
 	for (size_t i = deque.size() / 2; i < deque.size(); i++)
 		deq2.push_back(deque[i]);
-	SortDeque(deq1);
-	SortDeque(deq2);
+	sortDeque(deq1);
+	sortDeque(deq2);
 	deque = checkMerge(deq1, deq2);
+}
+
+void PmergeMe::countainersData(void)
+{
+	std::cout << "Time to process a range of " << size << " elements with std::vector<int> : " << (double)(vectorEnd - vectorStart) << " us" << std::endl;
+	std::cout << "Time to process a range of " << size << " elements with std::deque<int>  : " << (double)(dequeEnd - dequeStart) << " us" << std::endl;
 }
 
 void PmergeMe::startSorting(int ac, char **av)
 {
 	initDeque(ac, av);
-	SortDeque(this->_deque);
+	sortDeque(*_deque);
 	dequeEnd = clock();
 	initVector(ac, av);
-	SortVector(this->_vector);
+	sortVector(*_vector);
 	vectorEnd = clock();
+	printSorted();
+	countainersData();
 }
 
 const char* PmergeMe::wrongInput::what() const throw()

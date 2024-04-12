@@ -13,29 +13,24 @@
 class PmergeMe
 {
 	private:
-		std::vector<int> _vector;
-		std::deque<int> _deque;
+		std::vector<int> *_vector;
+		std::deque<int> *_deque;
 		clock_t vectorStart;
 		clock_t vectorEnd;
 		clock_t dequeStart;
 		clock_t dequeEnd;
-		int _size;
+		int size;
 	public:
 		PmergeMe();
 		~PmergeMe();
 		PmergeMe(const PmergeMe &other);
 		PmergeMe &operator=(PmergeMe const &other);
-		clock_t getVecStartTime(void);
-		clock_t getVecEndTime(void);
-		clock_t getDequeStartTime(void);
-		clock_t getDequeEndTime(void);
-		void sortVector(std::vector<int> &vector);
 		void initVector(int ac, char **av);
 		void initDeque(int ac, char **av);
-		void SortDeque(std::deque<int> &deque);
-		std::deque<int>& checkMerge(std::deque<int> &deq1, std::deque<int> &deq2);
-		void sortMerge(std::deque<int> &deque);
+		void sortDeque(std::deque<int> &deque);
 		void sortVector(std::vector<int> &vector);
+		void printSorted(void);
+		void countainersData(void);
 		void startSorting(int, char **);
 		class wrongInput : public std::exception
 		{

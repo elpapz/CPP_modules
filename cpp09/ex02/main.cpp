@@ -2,7 +2,8 @@
 
 void parse_input(int ac, char **av)
 {
-	if (ac < 2)
+	(void)ac;
+	 if (ac < 2)
 		throw PmergeMe::wrongInput();
 	for (int i = 1; i < ac; i++)
 	{
@@ -41,3 +42,5 @@ int main(int argc, char **argv)
 	}
 	return 0;
 }
+
+
