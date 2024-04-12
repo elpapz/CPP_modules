@@ -62,11 +62,12 @@ void RPN::convert(char *input)
     while (!iss.eof())
     {
         iss >> token;
-        //double i = std::stod(token);
-        if (iss.fail() || iss.bad() || token.length() != 1)
+        if (iss.fail() || iss.bad())
+        {
             throw WrongInputException();
+        }
         if (isdigit(token[0]))
-            _stack.push(std::atoi(token.c_str()));
+            _stack.push(std::atol(token.c_str()));
         else
         {
             if (_stack.size() < 2 || token.length() > 1)
@@ -79,7 +80,13 @@ void RPN::convert(char *input)
         }
     }
     if (_stack.size() != 1)
+    {
         throw WrongInputException();
+    }
+    if (_stack.top() > (double)INT_MAX || _stack.top() < (double)INT_MIN)
+    {
+        throw WrongInputException();
+    }
     std::cout << _stack.top() << std::endl;
 }
 

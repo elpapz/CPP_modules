@@ -9,6 +9,7 @@
 # include <cstdlib>
 # include <exception>
 # include <cstdlib>
+#include <limits.h>
 
 class RPN
 {
